@@ -2,6 +2,8 @@ package backend;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import commands.Command;
 import commands.CommandFactory;
@@ -43,12 +45,23 @@ public class Interpreter {
 
 	public ArrayList<String> listOutCommands(String commands) {
 		ArrayList<String> listOfWords = new ArrayList<String>();
+		ArrayList<String> listOfCommandBlocks = new ArrayList<String>();
 		String[] words = commands.split("\\s+");
-		for (String word : words) {
+		Pattern p = Pattern.compile("\\[(.*?)\\]");
+		Matcher m = p.matcher(commands);
+		for (int i = 0; i < words.length; i++) {
+			String word = words[i];
+			if (words[i].startsWith("[")) {
+				while (!words[i].endsWith("]")) {
+					i++;
+				}
+				m.find();
+				word = m.group(1);
+			}
 			listOfWords.add(word);
+			System.out.println("added beginning[" + word + "]end");
 		}
 		return listOfWords;
-
 	}
 
 	private Double evaluateCommand(ArrayList<String> wordList)
