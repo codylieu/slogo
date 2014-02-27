@@ -209,11 +209,7 @@ public class InterpreterGUI extends JPanel {
 	public void createAndShowGUI() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 		// Create and set up the window.
-		JFrame frame = new JFrame("Slogo!");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		JPanel newPanel = new JPanel();
-
+		
 		InterpreterGUI newInterpreter = new InterpreterGUI(new Interpreter());
 		newTurtleGUI = new TurtleGUI(interpreter.engine);
 		
